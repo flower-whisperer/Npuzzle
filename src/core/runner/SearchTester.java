@@ -55,14 +55,21 @@ public final class SearchTester {
         ArrayList<HeuristicType> heuristics = getHeuristicTypes(type, step);
 
         //对于N puzzle问题，heuristics的值是[MISPLACED, MANHATTAN]
-        for (HeuristicType heuristicType : heuristics) { 
+
+        for (HeuristicType heuristicType : heuristics) {
             //solveProblems方法根据不同启发函数生成不同的searcher
             //从Feeder获取所使用的搜索引擎（AStar，IDAStar等），
             //searcher-> bestfirstsearcher
+            //这里修改search算法，使用arg2来控制
+            if(step == 1)
+                solveProblems(problems, feeder.getAStar(heuristicType), heuristicType);
+            else if(step == 2)
+                solveProblems(problems,feeder.getIdaStar(heuristicType),heuristicType);
 
-            solveProblems(problems, feeder.getAStar(heuristicType), heuristicType);
             System.out.println();
         }
+
+
     }
 
     /**
@@ -83,6 +90,10 @@ public final class SearchTester {
             //NPuzzle问题的第一阶段，使用不在位将牌和曼哈顿距离
             if (step == 1) {
                 heuristics.add(MISPLACED);
+                heuristics.add(MANHATTAN);
+            }
+            //第二阶段只用曼哈顿距离
+            else if(step == 2){
                 heuristics.add(MANHATTAN);
             }
             //NPuzzle问题的第三阶段，使用Disjoint Pattern
