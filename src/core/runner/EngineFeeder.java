@@ -58,14 +58,13 @@ public abstract class EngineFeeder {
      * 用来做对比实验的AStar, 对所有问题都是一样的
      * 可配置使用不同的启发函数
      * @param type 可配置的启发函数类型
+     * @param searchMethod 可配置的启发函数类型,新加，用于区分使用不同的搜索函数（A*和IDA*）
      */
     public final AbstractSearcher getAStar(HeuristicType type) {
         Predictor predictor = getPredictor(type);
         // 获取Frontier，其Node以g(n)+h(n)的升序排列，相同时，按照g(n)的升序排列
+        // 默认的frontier是一个arraylist+比较器实现的
         Frontier frontier = getFrontier(EvaluationType.FULL);
-        // 根据frontier和predictor生成AStar引擎
-        //predictor已经写好了，就是不在牌位或者曼哈顿距离
-        //frontier就是一个list？
         return new BestFirstSearcher(frontier, predictor);
     }
 

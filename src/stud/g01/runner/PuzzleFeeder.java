@@ -9,7 +9,9 @@ import core.solver.queue.Frontier;
 import core.solver.queue.Node;
 import stud.g01.problem.npuzzle.NPuzzleProblem;
 import stud.g01.problem.npuzzle.PuzzleBoard;
+import stud.g01.queue.PqFrontier;
 import stud.queue.ListFrontier;
+
 
 import java.util.ArrayList;
 //Fix Me   //Fix Me
@@ -61,8 +63,9 @@ public class PuzzleFeeder extends EngineFeeder {
     @Override
 
     public Frontier getFrontier(EvaluationType type) {
-        //这里是full
-        return new ListFrontier(Node.evaluator(type));
+        //这里可以选择不同的frontier
+        return new PqFrontier();
+//        return new ListFrontier(Node.evaluator(type));
     }
     @Override
     public Predictor getPredictor(HeuristicType type) {

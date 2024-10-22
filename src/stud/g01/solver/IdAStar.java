@@ -14,6 +14,7 @@ public class IdAStar extends AbstractSearcher {
 
     @Override
     public Deque<Node> search(Problem problem) {
+        System.out.println("这里是IDA算法");
         return null;
     }
 }

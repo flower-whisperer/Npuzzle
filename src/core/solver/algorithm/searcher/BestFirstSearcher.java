@@ -47,15 +47,14 @@ public final class BestFirstSearcher extends AbstractSearcher {
 		// 起始节点root
 		Node root = problem.root(predictor);
 		frontier.offer(root);
-
-		// 搜索。。。
+		// 搜索
 		while (true) {
 			if (frontier.isEmpty())  // 在到达目标状态之前frontier变为空，则问题无解
 				return null;
 
 			Node node = frontier.poll(); // 从优先队列frontier中取出估值最小的节点
 //			System.out.println(explored.size());
-//			node.getState().draw();
+
 			if (problem.goal(node.getState())) { //进入目标状态
 				return generatePath(node);
 			}

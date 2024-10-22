@@ -14,6 +14,8 @@ public class PqFrontier extends PriorityQueue<Node> implements Frontier {
 
     @Override
     public boolean offer(Node node) {
-        return false;
+        //就这么简单？！
+        super.offer(node);
+        return true;
     }
 }
