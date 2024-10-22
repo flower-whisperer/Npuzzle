@@ -55,14 +55,21 @@ public final class SearchTester {
         ArrayList<HeuristicType> heuristics = getHeuristicTypes(type, step);
 
         //对于N puzzle问题，heuristics的值是[MISPLACED, MANHATTAN]
-        for (HeuristicType heuristicType : heuristics) { 
+
+        for (HeuristicType heuristicType : heuristics) {
             //solveProblems方法根据不同启发函数生成不同的searcher
             //从Feeder获取所使用的搜索引擎（AStar，IDAStar等），
             //searcher-> bestfirstsearcher
-            System.out.println("最后的for循环里，这里是"+ heuristics+"启发函数");
-            solveProblems(problems, feeder.getAStar(heuristicType), heuristicType);
+            //这里修改search算法，使用arg2来控制
+            if(step == 1)
+                solveProblems(problems, feeder.getAStar(heuristicType), heuristicType);
+            else if(step == 2)
+                solveProblems(problems,feeder.getIdaStar(heuristicType),heuristicType);
+
             System.out.println();
         }
+
+
     }
 
     /**
@@ -85,6 +92,10 @@ public final class SearchTester {
                 heuristics.add(MISPLACED);
                 heuristics.add(MANHATTAN);
             }
+            //第二阶段只用曼哈顿距离
+            else if(step == 2){
+                heuristics.add(MANHATTAN);
+            }
             //NPuzzle问题的第三阶段，使用Disjoint Pattern
             else if (step == 3){
                 heuristics.add(DISJOINT_PATTERN);
@@ -103,7 +114,6 @@ public final class SearchTester {
         for (Problem problem : problems) {
             // 使用AStar引擎求解问题
             StopwatchCPU timer1 = new StopwatchCPU();
-            System.out.println("SearchTester solveProblems");
             Deque<Node> path = searcher.search(problem);
             double time1 = timer1.elapsedTime();
 
