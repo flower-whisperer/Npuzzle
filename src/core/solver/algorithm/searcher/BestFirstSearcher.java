@@ -63,10 +63,13 @@ public final class BestFirstSearcher extends AbstractSearcher {
 
 			//对节点node进行扩展  Expansion
 			for (Node child : problem.childNodes(node, predictor)) {
-				nodesGenerated++;
+
 
 				if (!expanded(child)) // 如果新生成的节点（新扩展出的节点）还没有被扩展，则插入到frontier中。
+				{
+					nodesGenerated++;
 					frontier.offer(child);  //同学们可以试一下，
+				}
 				       // revisited也一律加到Frontier的情况，和扔掉不好的两种情况
 				// 如果已经扩展过，就舍弃掉。
 			}

@@ -8,6 +8,7 @@ import core.solver.queue.Node;
 import core.solver.algorithm.heuristic.HeuristicType;
 import stud.g01.problem.npuzzle.NPuzzleProblem;
 import stud.g01.problem.npuzzle.PuzzleBoard;
+import stud.g01.solver.IdAStar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -113,18 +114,29 @@ public final class SearchTester {
     private static void solveProblems(ArrayList<Problem> problems, AbstractSearcher searcher, HeuristicType heuristicType) {
         for (Problem problem : problems) {
             // 使用AStar引擎求解问题
+
             StopwatchCPU timer1 = new StopwatchCPU();
             Deque<Node> path = searcher.search(problem);
             double time1 = timer1.elapsedTime();
 
+
             if (path == null) {
-                System.out.println("No Solution" + "，执行了" + time1 + "s，"+
-                        "共生成了" + searcher.nodesGenerated() + "个结点，" +
-                        "扩展了" + searcher.nodesExpanded() + "个结点");
+                if(searcher instanceof IdAStar){
+                    System.out.println("IDA*算法：" +  "解路径长度：" + ((IdAStar) searcher).solutionSize + "，执行了" + time1 + "s，" +
+                            "共生成了" + searcher.nodesGenerated() + "个结点，" +
+                            "扩展了" + searcher.nodesExpanded() + "个结点");
+                }
+                else{
+                    System.out.println("No Solution" + "，执行了" + time1 + "s，"+
+                            "共生成了" + searcher.nodesGenerated() + "个结点，" +
+                            "扩展了" + searcher.nodesExpanded() + "个结点");
+                }
+
                 continue;
             }
 
             // 解路径的可视化
+
             problem.showSolution(path);
 
             System.out.println("启发函数：" + heuristicType + "，解路径长度：" + path.size() + "，执行了" + time1 + "s，" +

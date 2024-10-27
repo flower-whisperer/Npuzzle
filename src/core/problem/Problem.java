@@ -14,10 +14,19 @@ import java.util.List;
 public abstract class Problem {
     //成员变量
     protected State initialState;
+
+    public State getInitialState() {
+        return initialState;
+    }
+
     protected State goal;
     protected int size;     // 问题的规模：15-puzzle为4，Puzzle的边长；
                             // 寻路问题为Grid的边长；
-                            // 野人传教士为野人与传教士的人数
+
+    public State getGoal() {
+        return goal;
+    }
+    // 野人传教士为野人与传教士的人数
 
     public Problem(State initialState, State goal) {
         this.initialState = initialState;
@@ -27,6 +36,10 @@ public abstract class Problem {
     public Problem(State initialState, State goal, int size) {
         this(initialState, goal);
         this.size = size;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**

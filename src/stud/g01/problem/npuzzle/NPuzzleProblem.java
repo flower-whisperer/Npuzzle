@@ -8,18 +8,32 @@ import core.solver.queue.Node;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class NPuzzleProblem extends Problem {
 
+    private final long[][] zobristTable;
+    private long currentHash;
 
-    public NPuzzleProblem(State initialState, State goal) {
-        super(initialState, goal);
+    public void setCurrentHash(long currentHash) {
+        this.currentHash = currentHash;
     }
 
     public NPuzzleProblem(State initialState, State goal, int size) {
         super(initialState, goal, size);
+        this.zobristTable = new long[size * size][size * size]; // 用于0到n*n的状态
+        generateZobristTable();
     }
-
+    private void generateZobristTable() {
+        Random rand = new Random();
+        for (int i = 0; i < size * size; i++) {
+            for (int j = 0; j < size * size; j++) {
+                for (int k = 0; k < 2; k++) {
+                    zobristTable[i][j] = rand.nextLong();
+                }
+            }
+        }
+    }
     //是否可解与输入的逆序数有关，这里偷懒直接判断为可解
     @Override
     public boolean solvable() {
@@ -74,6 +88,13 @@ public class NPuzzleProblem extends Problem {
         this.goal.draw();
         System.out.println("结束——————————————————————————————————————————————————");
 
+    }
+    public long[][] getZobristTable() {
+        return zobristTable;
+    }
+
+    public long getCurrentHash() {
+        return currentHash;
     }
 }
 

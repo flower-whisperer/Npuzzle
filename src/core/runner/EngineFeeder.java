@@ -7,8 +7,9 @@ import core.solver.queue.EvaluationType;
 import core.solver.algorithm.heuristic.HeuristicType;
 import core.solver.algorithm.heuristic.Predictor;
 import core.solver.queue.Frontier;
-import stud.queue.StackFrontier;
 import stud.g01.solver.IdAStar;
+import stud.queue.StackFrontier;
+
 
 import java.util.ArrayList;
 
@@ -47,10 +48,9 @@ public abstract class EngineFeeder {
      * 用来做对比实验的IdAStar （Iterative Deepening AStar，迭代加深的AStar）
      */
     public final AbstractSearcher getIdaStar(HeuristicType type) {
-        Predictor predictor = getPredictor(type);
-        // 获取Frontier，其Node以g(n)+h(n)的升序排列，相同时，按照g(n)的升序排列
         Frontier frontier = new StackFrontier();
         //生成IdAStar引擎（算法实例）
+//
         return new IdAStar(frontier);
     }
 

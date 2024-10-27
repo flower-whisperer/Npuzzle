@@ -31,6 +31,7 @@ public final class Node implements Comparable<Node> {
 		this.pathCost = pathCost;
 		this.heuristic = heuristic;
 	}
+	
 
 	/**
 	 * @param state     当前结点的状态

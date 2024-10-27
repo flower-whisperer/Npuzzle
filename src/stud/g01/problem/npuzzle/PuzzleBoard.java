@@ -67,8 +67,8 @@ public class PuzzleBoard extends State {
         {
             for(int j = 0; j < size;j ++)
             {
-                if(this.puzzle_board[i][j]!=0 && this.puzzle_board[i][j] != goal.puzzle_board[i][j])
-                    ct = ct +1;
+                if(this.puzzle_board[i][j] != 0 && this.puzzle_board[i][j] != goal.puzzle_board[i][j])
+                    ct++;
             }
         }
         return ct;
@@ -109,13 +109,7 @@ public class PuzzleBoard extends State {
                     y = j;
                 }
             }
-//        boolean check  = true;
-//        for (int i = 0; i < size; i ++)
-//        {
-//            check = check && Arrays.equals(pb[i],originpb[i]);
-//
-//        }
-//        boolean check2 = Arrays.equals(pb[0],getPuzzle_board()[0]);
+
         //½»»»
         int exchangex = x + offsets[0];
         int exchangey = y + offsets[1];
