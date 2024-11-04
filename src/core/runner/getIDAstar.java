@@ -96,11 +96,6 @@ import java.util.Scanner;
                 yy[k] = i & 3;  // i % 4
             }
         }
-//        if (!a.check()) { // 判断解的存在性
-//            System.out.println("No");
-//            return;
-//        }
-
         // 从目标状态向初始状态更新
         for (int i = 0; i < 16; ++i) {
             a.mat[i] = i + 1;

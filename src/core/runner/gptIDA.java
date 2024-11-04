@@ -1,3 +1,5 @@
+package core.runner;
+
 import java.util.*;
 
 class NPuzzle {
